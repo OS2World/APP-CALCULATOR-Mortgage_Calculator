@@ -1,0 +1,103 @@
+Mortgage Calculator v1.10
+
+This program computes payment information for fixed rate amortized loans.
+The user can supply any three of the four mortgage parameters; principal,
+interest, term (# of months) and monthly payment.  The fourth parameter
+is calculated automatically.
+
+MORTGAGE can also produce a payment schedule, indicating the principal,
+interest, remaining principal, and total interest on a month-by-month
+basis.  To produce a payment schedule, use the -s option.
+
+The syntax for MORTGAGE is:
+
+    mortgage [<sourcefile>] [-s<outfile>]
+
+The <sourcefile> can be used to simplify operation by preloading parameters
+common to many calculations.  <sourcefile> is a simple line-by-line ASCII
+text file.  Comment lines start with the ';' character.  Blank lines are
+also ignored.
+
+<sourcefile> consists of a sequence of keys, assigning values to mortgage
+parameters.  These keys are defined:
+
+    MORTGAGE - Specifies initial principal.
+    INTEREST - Annual interest rate (in percent)
+    MONTHS - Number of months to pay
+    PAYMENT - Amount of monthly payment
+    STARTMONTH - Month at which loan is taken (ex. "Jan")
+    STARTYEAR - Year at which loan is taken
+
+Any parameters not specified in a source file are queried at the OS
+prompt.  STARTMONTH and STARTYEAR are only required when a payment
+schedule is requested.
+
+See Data.TXT for a sample <sourcefile>
+
+INPUT
+
+If the sourcefile contains less than three of the first four parameters,
+MORTGAGE will prompt for the remaining items.  To not specify, simply
+enter nothing.  If more than one of the four fields remains unspecified,
+the program cannot continue.
+
+If the start date is required (and not in the <sourcefile>), MORTGAGE
+will prompt for these values.  Enter the month as its name (ex. Aug).
+Only the first three characters are recognized.  To use today's date,
+simply press enter.  If either the start month or start year are missing from
+the source file, BOTH are prompted for.
+
+Note: The start date is considered the date at which the loan is taken
+out, NOT the due date of the first payment.  So, if August 1997 is
+specified, the first payment (and interest accrual) date is Sept 1997.
+
+
+OUTPUT
+
+When all required input is provided, MORTGAGE outputs the four mortgage
+parameters; three specified and one computed.  The computed parameter
+is designated as such by "(computed)".
+
+If the "-s" option is specified, a payment schedule is also output.
+Depending upon the parameters, the last payment may be different than
+the "normal" payment.  Although the payment schedule is normally output to
+<outfile>, it can be output to the screen simply by omitting <outfile>.
+
+
+NOTES
+
+If the number of payments is unspecified, it is theoretically possible to
+have a loan which can never be paid.  This occurs when the specified
+monthly payment is less than the interest accrued during the first month.
+In this event, MORTGAGE simply outputs that the loan can never be paid.
+
+If the interest rate is unspecified, it is calculated by an iterative
+algorithm.  This is because there is no straightforward method for
+computing interest.  The algorithm iterates until the iterative difference
+(error) between interest rates is tiny, about 0.0001%.  Although it has
+yet to occur in testing, some scenarios may become unsolvable.
+
+This code was written to be as portable as possible.  Every effort has been
+made to ensure its accuracy, but there are no guarantees (see LEGAL CRAP).
+
+Please email any comments/questions to igloo@mc.net.
+
+
+LEGAL CRAP
+
+Software is provided "as is" with no warranty of any kind, expressed or
+implied.  User assumes full responsibility for software's use.  Author
+shall not be liable for any damages resulting from use of this
+software.
+
+If you can't make your mortgage payments, don't blame me!
+
+MORTGAGE is freeware.  Feel free to distribute and/or modify the code
+to your heart's content.  All I ask is that you report any bugs, suggested
+improvements, and comments to igloo@mc.net.  If anybody ports this code to
+another OS in a manner which requires source code changes, I would appreciate
+receiving a copy for my own enlightenment.
+
+A PM based version of this code may soon be available, but no promises.
+(I'm very busy these days trying to pay MY mortgage.)
+

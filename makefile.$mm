@@ -1,0 +1,27 @@
+:TARGET.SUFFIXES
+:DEPENDENCY..C .obj 
+:TARGET.all
+:DEPENDENCY.
+.\Mortgage.exe
+:RULE..C.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /G5 /C %s
+:RULE.{G:\Programming\Programs\C\Mortgage}.C.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /G5 /C %s
+:TARGET..\Mortgage.exe
+:DEPENDENCY.
+.\Mortgage.obj
+:ACTION.Link::Linker
+:COMMAND.
+icc.exe @<<
+ /B" /de"
+ /FeMortgage.exe 
+ .\Mortgage.obj
+<<
+:TARGET..\Mortgage.obj
+:DEPENDENCY.
+G:\Programming\Programs\C\Mortgage\Mortgage.C
+{G:\Programming\Programs\C\Mortgage;$(INCLUDE);}Mortgage.H
